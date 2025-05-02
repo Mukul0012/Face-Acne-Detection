@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Acne Detection & Gut Health Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    /* Make the page fill 100% of the screen */
+    html, body {
+        align-items: center;
+        align-content: center;
+        height: fit-content;
+        width: fit-content;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+    }
+
+    /* Use flexbox to center the content vertically and horizontally */
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 20px;
+    }
+
+    h1, h2, h3 {
+        color: #e74c3c;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #e74c3c;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #c0392b;
+    }
+
+    /* Form and content styling */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #34495e;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    form label {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    form input {
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #4b5d6d;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #e74c3c;
+    }
+
+    tr:nth-child(even) {
+        background-color: #5f6d7e;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #4b5d6d;
+    }
+
+    img {
+        width: 400px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+</style>
+<body>
+    <div class="container">
+        <h1 class="my-4">Face Acne Detection & Gut Health Prediction</h1>
+        
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload Image:</label>
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% if uploaded_img_path %}
+            <h2 class="my-4">Processed Image</h2>
+            <img src="{{ uploaded_img_path }}" alt="Processed Image" style="width: 400px;">
+
+            <h3 class="my-3">Acne Detected In:</h3>
+            <ul>
+            {% for location in acne_info %}
+                <li>{{ location }}</li>
+            {% endfor %}
+            </ul>
+
+            <h3 class="my-3">Gut Health Prediction:</h3>
+            <p>{{ gut_pred }}</p>
+
+            <h3 class="my-3">Gut Health Values:</h3>
+            <div>
+                <!-- Display the gut health table -->
+                {{ gut_health_values | safe }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
